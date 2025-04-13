@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>peliculas registradas</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin: 0 auto;
+            width: 80%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #eee;
+        }
+
+        a {
+            text-decoration: none;
+            color: #0066cc;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .agregar {
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: #0066cc;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .agregar:hover {
+            background-color: #004c99;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>peliculas registradas</h1>
+
+    <a href="/agregar" class="agregar">agregar nueva pelicula</a>
+
+    <table>
+        <tr>
+            <th>id</th>
+            <th>titulo</th>
+            <th>genero</th>
+            <th>anio</th>
+            <th>clasificacion</th>
+            <th>acciones</th>
+        </tr>
+        {% for p in peliculas %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.titulo }}</td>
+            <td>{{ p.genero }}</td>
+            <td>{{ p.anio }}</td>
+            <td>{{ p.clasificacion }}</td>
+            <td>
+                <a href="/detalle/{{ p.id }}">ver</a> |
+                <a href="/editar/{{ p.id }}">editar</a> |
+                <a href="/eliminar/{{ p.id }}">eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+</html>

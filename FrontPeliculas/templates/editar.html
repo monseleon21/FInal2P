@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>editar pelicula</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: white;
+            display: inline-block;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            margin-top: 20px;
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #004c99;
+        }
+
+        .volver {
+            display: inline-block;
+            margin-top: 15px;
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .volver:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>editar pelicula</h1>
+
+    <form method="post">
+        <label>titulo</label>
+        <input type="text" name="titulo" value="{{ pelicula.titulo }}" required>
+
+        <label>genero</label>
+        <input type="text" name="genero" value="{{ pelicula.genero }}" required>
+
+        <label>anio</label>
+        <input type="number" name="anio" value="{{ pelicula.anio }}" required>
+
+        <label>clasificacion</label>
+        <input type="text" name="clasificacion" value="{{ pelicula.clasificacion }}" maxlength="1" required>
+
+        <button type="submit">actualizar</button>
+    </form>
+
+    <br>
+    <a class="volver" href="/">volver al inicio</a>
+
+</body>
+</html>

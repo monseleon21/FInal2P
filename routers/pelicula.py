@@ -22,7 +22,7 @@ def obtener_p():
 
 
 #Endpoint consultar 1 Pelicula
-@routerPelicula.get('/peliculas{id}', response_model=[modeloPeliculaResponse], tags=['Consultar 1 pelicula'])
+@routerPelicula.get('/peliculas/{id}', response_model=modeloPeliculaResponse, tags=['Consultar 1 pelicula'])
 def obtener_p(id: int):
     db = Session()
     try:
@@ -38,13 +38,13 @@ def obtener_p(id: int):
 
 #Endpoint Agregar Pelicula
 @routerPelicula.post('/peliculas', response_model=modeloPelicula, tags=['Guardar Pelicula'])
-def agregar_p(peliculas: modeloPelicula):
+def agregar_p(pelicula: modeloPelicula):
     db = Session()
     try:
         nueva=Pelicula(**pelicula.model_dump())
         db.add(nueva)
         db.commit()
-        return JSONResponse(status_code=201, content={'message':'Se agrego la Pelicula', 'pelicula': pelicula.model_dump()})
+        return JSONResponse(status_code=202, content={'message':'Se agrego la Pelicula', 'pelicula': pelicula.model_dump()})
     except Exception as e:
         db.rollback()
         return JSONResponse(status_code=500, content={'message': 'Error al agregar la pelicula', 'exception': str(e)})
@@ -60,7 +60,7 @@ def editar_p(id: int, pelicula_actualizada: modeloPelicula):
         pelicula = db.query(Pelicula).filter(Pelicula.id == id).first()
         if not pelicula:
             raise HTTPException(status_code=404, detail='Pelicula no encontrada')
-        for campo, valor in pelicula_actualizada.model_dump().items
+        for campo, valor in pelicula_actualizada.model_dump().items():
             setattr(pelicula, campo, valor)
         db.commit()
         db.refresh(pelicula)
