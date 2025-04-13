@@ -4,6 +4,9 @@ from fastapi import APIRouter, HTTPException
 from DB.conexion import Session
 from models.peliculasDB import Pelicula
 from modelsPydantic import modeloPelicula, modeloPeliculaResponse
+from auth import verificar_token
+from fastapi import Depends
+from auth import verificar_token
 
 routerPelicula = APIRouter()
 
@@ -72,7 +75,7 @@ def editar_p(id: int, pelicula_actualizada: modeloPelicula):
 
 
 #Endpoint eliminar Pelicula
-@routerPelicula.delete('/peliculas/{id}',tags=['Eliminar peliculas'])
+@routerPelicula.delete('/peliculas/{id}',dependencies=[Depends(verificar_token)],tags=['Eliminar peliculas'])
 def eliminar_p(id: int):
     db = Session()
     try:
